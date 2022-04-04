@@ -1,1 +1,43 @@
-mergesort
+package com.company;
+
+import java.util.Arrays;
+
+public class Main {
+
+    public static int[] merczsort(int a[]) {
+        int n = a.length;
+        if (n == 1) {
+            return a;
+        }
+
+        int[] lewa = Arrays.copyOfRange(a, 0, n / 2);
+        int[] prawa = Arrays.copyOfRange(a, n / 2, n);
+        lewa = merczsort(lewa);
+        prawa = merczsort(prawa);
+
+        int[] tablica = new int[lewa.length + prawa.length];
+        int l = 0, p = 0, i = 0;
+
+        while (true){
+            if (l < lewa.length && p < prawa.length) {
+                if (lewa[l] <= prawa[p]) {
+                    tablica[i++] = lewa[l++];
+                } else {
+                    tablica[i++] = prawa[p++];
+                }
+            }
+            else if (l < lewa.length)
+                tablica[i++] = lewa[l++];
+            else if (p < prawa.length)
+                tablica[i++] = prawa[p++];
+            else
+                break;
+        }
+        return tablica;
+    }
+
+    public static void main(String[] args) {
+        int[] tablica = {17,4,6634,3,-73,5,0,75,101,42};
+        System.out.println(Arrays.toString(merczsort(tablica)));
+    }
+}

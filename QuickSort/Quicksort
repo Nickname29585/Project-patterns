@@ -1,1 +1,56 @@
-quickjsort
+package com.company;
+
+import java.util.*;
+class QuickSort {
+
+    int podział(int intArray[], int mniejsza, int wieksza) {
+        int pom = intArray[wieksza];
+        int i = (mniejsza-1);
+        for (int j=mniejsza; j<wieksza; j++) {
+
+            if (intArray[j] <= pom) {
+                i++;
+
+                int temp = intArray[i];
+                intArray[i] = intArray[j];
+                intArray[j] = temp;
+            }
+        }
+
+
+        int temp = intArray[i+1];
+        intArray[i+1] = intArray[wieksza];
+        intArray[wieksza] = temp;
+
+        return i+1;
+    }
+
+
+
+    void quicksort(int intArray[], int low, int high) {
+        if (low < high) {
+
+            int pi = podział(intArray, low, high);
+
+
+            quicksort(intArray, low, pi-1);
+            quicksort(intArray, pi+1, high);
+        }
+    }
+}
+
+class Main{
+    public static void main(String args[]) {
+
+        int intArray[] = {766,53,2,77,-63,0,-4332,4,87,1};
+        int n = intArray.length;
+
+        System.out.println("Tablica przed sortowaniem: " + Arrays.toString(intArray));
+
+        QuickSort obj = new QuickSort();
+        obj.quicksort(intArray, 0, n-1);
+
+        System.out.println("Tablica po sortowaniu: " + Arrays.toString(intArray));
+    }
+}
+
